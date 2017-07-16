@@ -7,9 +7,31 @@
 //
 
 #include <iostream>
+#include <string>
+
+using namespace std;
 
 int main(int argc, const char * argv[]) {
-	// insert code here...
-	std::cout << "Hello, World!\n";
+	string phoneNumber;
+	getline(cin, phoneNumber);
+	
+	if (phoneNumber.substr(0, 3) != "416" && phoneNumber.substr(0, 3) != "647" && phoneNumber.substr(0, 3) != "437") {
+		cout << "invalid";
+		goto finish;
+	} else if (phoneNumber.at(4) == ' ') {
+		cout << "invalid";
+		goto finish;
+	} else if (phoneNumber.at(3) != ' ') {
+		cout << "invalid";
+		goto finish;
+	} else if (phoneNumber.length() != 11) {
+		cout << "invalid";
+		goto finish;
+	}
+	
+	if (phoneNumber.substr(0, 3) == "416") cout << "valuable";
+	else if (phoneNumber.substr(0, 3) == "647" ||phoneNumber.substr(0, 3) == "437" ) cout << "valueless";
+	
+finish:
 	return 0;
 }

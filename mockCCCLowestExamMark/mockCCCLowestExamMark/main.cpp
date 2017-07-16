@@ -7,9 +7,18 @@
 //
 
 #include <iostream>
+#include <cmath>
+using namespace std;
 
 int main(int argc, const char * argv[]) {
-	// insert code here...
-	std::cout << "Hello, World!\n";
+	int P, Q, W;
+	cin >> P >> Q >> W;
+	
+	double currentAvg = P * (1 - W/(double)100);
+	double examMark = (Q - 0.5 - currentAvg) / (W / (double) 100);
+	
+	if (examMark < 0) cout << 0;
+	else if (examMark > 100.01) cout << "DROP THE COURSE";
+	else cout << round(examMark);
 	return 0;
 }

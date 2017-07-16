@@ -11,7 +11,7 @@
 
 using namespace std;
 
-long long inverse (long long a, long long n) {
+long long inverse (unsigned long long a, unsigned long long n) {
 	long long t = 0, newT = 1, r = n, newR = a;
 	while (newR != 0) {
 		auto divRes = lldiv(r, newR);
@@ -27,7 +27,7 @@ long long inverse (long long a, long long n) {
 }
 
 int main() {
-	long long N, M;
+	unsigned long long N, M;
 	cin >> N >> M;
 	
 	cout << inverse(N, M) << endl;
