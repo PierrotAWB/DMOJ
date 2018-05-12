@@ -1,64 +1,32 @@
-//
-//  main.cpp
-//  Deforestation
-//
-//  Created by Andrew Wang on 2017-07-16.
-//  Copyright © 2017 Andrew Wang. All rights reserved.
-//
+#include <iostream>
+#include <vector>
 
-#include <stdio.h>
+using namespace std; 
 
-#define p(k) ((k) & (-k))
+int N, Q, total = 0;
+vector<unsigned int> cumsum; 
 
-int num[1000001];
-
-void fen_init(int *a, int size) {
-	for (unsigned int i = 0; i < size; i++) {
-		unsigned int j = i + p(i + 1);
-		if (j < size)
-			num[j] += num[i];
+int main() { 
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cin >> N; 
+	for (int i = 0; i < N; i++) { 
+		int m; 
+		cin >> m;
+		total += m;
+		cumsum.push_back(total);
 	}
-}
+	cin >> Q; 
+	for (auto u : cumsum) 
+		cout << u << " ";
 
-int Fen_range(int *a, unsigned int i, unsigned int j)
-{
-	int sum = 0;
-	
-	while (j > i) {
-		sum += a[j-1];
-		j -= p(j);
-	}
-	
-	while (i > j) {
-		sum -= a[i-1];
-		i -= p(i);
-	}
-	return sum;
-}
 
-int main(int argc, const char * argv[]) {
-	int N;
-	scanf("%d", &N);
-	
-	num[0] = 0;
-	scanf("%d", &num[1]);
-	
-	for (int i = 2; i <= N; i++) {
-		int m;
-		scanf("%d", &m);
-		num[i] = num[i - 1] + m;
-	}
-	
-	fen_init(num, N + 1);
-	
-	int Q;
-	scanf("%d", &Q);
-	
-	for (unsigned int i = 0; i < Q; i ++){
+	for (int i = 0; i < Q; i++) { 
 		int a, b;
-		scanf("%d %d", &a, &b);
-		printf("%d\n", Fen_range(num, a + 1, b + 1));
+		cin >> a >> b; 
+		if (a != 0)
+			cout << cumsum[b] - cumsum[a - 1] << "\n";
+		else 
+			cout << cumsum[b] << "\n";
 	}
-	
-	return 0;
 }
